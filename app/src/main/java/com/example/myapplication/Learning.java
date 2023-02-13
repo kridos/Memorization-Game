@@ -11,6 +11,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//TODO: figure out how to account for spaces at the beginning or end of typed answer
 public class Learning extends AppCompatActivity implements View.OnClickListener {
     private TextView answer, cardText;
     private Switch questionLanguage;

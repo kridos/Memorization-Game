@@ -19,11 +19,12 @@
         android:id="@+id/asking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/switch1"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="160dp"
-        android:text="Hello"
+        android:background="#00FFFFFF"
 
+        android:text="Hello"
         android:textSize="20dp" />
 
     <EditText
@@ -62,7 +63,7 @@
         android:layout_centerHorizontal="true"
 
         android:layout_marginTop="50dp"
-        android:text="Question in English"
+        android:text="Second Attribute in Card"
 
         />
 

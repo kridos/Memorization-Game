@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="100dp"
+    tools:context=".AddSet">
+
+    <TextView
+        android:id="@+id/firstAttribute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Attribute 1"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/secondAttribute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Attribute 2"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/firstAttributeInput"
+        android:layout_marginTop="80dp"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+
+
+        />
+
+    <EditText
+        android:id="@+id/firstAttributeInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="First Thing"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/firstAttribute"
+        android:layout_marginTop="20dp"
+        />
+
+    <EditText
+        android:id="@+id/secondAttributeInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Second Thing"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/secondAttribute"
+        android:layout_marginTop="20dp"
+        />
+
+    <Button
+        android:id="@+id/continueAdding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/secondAttributeInput"
+        android:layout_marginTop="80dp"
+        android:text="Add More" />
+
+    <Button
+        android:id="@+id/goBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/continueAdding"
+        android:layout_marginTop="50dp"
+        android:text="Back" />
+</RelativeLayout>

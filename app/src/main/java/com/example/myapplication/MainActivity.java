@@ -2,24 +2,15 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,9 +22,16 @@ public class MainActivity extends AppCompatActivity {
     double startTime = System.currentTimeMillis();
 
 
-    public void onClick(View v) {
+    public void onPracticeClick(View v) {
         Intent intent = new Intent(this, Learning.class);
         startActivity(intent);
+
+    }
+
+    public void onAddClick(View v) {
+        Intent intent = new Intent(this, AddSet.class);
+        startActivity(intent);
+        Data.clearWords();
 
     }
 
