@@ -35,6 +35,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void onViewClick(View v) {
+        Intent intent = new Intent(this, DisplaySet.class);
+        startActivity(intent);
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

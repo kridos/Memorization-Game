@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".DisplaySet"
+            android:exported="false" />
+        <activity
             android:name=".AddSet"
             android:exported="false" />
         <activity
