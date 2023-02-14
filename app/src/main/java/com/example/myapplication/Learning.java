@@ -26,7 +26,7 @@ public class Learning extends AppCompatActivity implements View.OnClickListener 
         switch(v.getId()){
 
             case R.id.answer:
-                Toast.makeText(this, "Clicked on Text", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Easter Egg", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.button:
