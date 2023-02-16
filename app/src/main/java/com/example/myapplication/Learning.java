@@ -15,7 +15,7 @@ import android.widget.Toast;
 public class Learning extends AppCompatActivity implements View.OnClickListener {
     private TextView answer, cardText;
     private Switch questionLanguage;
-    private Button nextButton;
+    private Button nextButton, quit;
     private View card;
     private EditText input;
     private int buttonCounter = 0;
@@ -60,6 +60,10 @@ public class Learning extends AppCompatActivity implements View.OnClickListener 
                 Data.setSwitchChecked(questionLanguage.isChecked());
                 break;
 
+            case R.id.quitButton:
+                finish();
+                break;
+
             default:
                 break;
 
@@ -77,6 +81,9 @@ public class Learning extends AppCompatActivity implements View.OnClickListener 
         answer = findViewById(R.id.answer);
         answer.setVisibility(View.INVISIBLE);
         answer.setOnClickListener(this);
+
+        quit = findViewById(R.id.quitButton);
+        quit.setOnClickListener(this);
 
         nextButton = findViewById(R.id.button);
         nextButton.setOnClickListener(this);

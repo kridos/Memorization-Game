@@ -1,13 +1,19 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -16,15 +22,22 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Intent intent;
-    private Button practice, add, display;
+    private Button practiceMatch, practiceInput, add, display, save;
     private InputStream inputStream;
     private BufferedReader reader;
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.button:
-                intent = new Intent(this, Matching.class);
+                if(Data.getWords().size() > 3) {
+                    intent = new Intent(this, Matching.class);
+                    startActivity(intent);
+                }
+                break;
+
+            case R.id.button1:
+                intent = new Intent(this, Learning.class);
                 startActivity(intent);
                 break;
 
@@ -39,6 +52,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
 
+            case R.id.save:
+                intent = new Intent(this, Save.class);
+                startActivity(intent);
+                break;
+
             default:
                 break;
         }
@@ -49,8 +67,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        practice = findViewById(R.id.button);
-        practice.setOnClickListener(this);
+
+        practiceMatch = findViewById(R.id.button);
+        practiceMatch.setOnClickListener(this);
+
+        practiceInput = findViewById(R.id.button1);
+        practiceInput.setOnClickListener(this);
 
         add = findViewById(R.id.button2);
         add.setOnClickListener(this);
@@ -58,13 +80,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         display = findViewById(R.id.button3);
         display.setOnClickListener(this);
 
+        save = findViewById(R.id.save);
+        save.setOnClickListener(this);
+
         Data.setWords(new ArrayList<>());
         Data.setSwitchChecked(true);
 
 
-
         try {
-            inputStream = getAssets().open("words.txt");
+            inputStream = getAssets().open("example.txt");
 
 
             reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -76,17 +100,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
 
+            /*inputStream = getAssets().open("SetNames.txt");
+            reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            System.out.println("Got to this point");
+
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }*/
+
             inputStream.close();
             reader.close();
+
+            //See if there is a better way to do this
+            File file = new File(getFilesDir() + "/NameSet.txt");
+            if(!file.exists()) {
+                openFileOutput("NameSet.txt", MODE_PRIVATE).close();
+
+            }
+            String temp = Data.read("NameSet", this);
+
+            if(!temp.contains("example")) {
+                Data.save("NameSet", "example\n", this);
+                Data.save("example", Data.writingString(), this);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
-
-
-
 
 
 }

@@ -16,8 +16,6 @@ public class Matching extends AppCompatActivity implements View.OnClickListener 
     private TextView cardText;
     private Switch questionLanguage;
     private Button option1, option2, option3, option4, next, quit;
-    private View card;
-    private String spanishWord, english;
     private int correctAnswer = 0, whichOne, counter;
     private int[] randoms;
 
@@ -81,7 +79,6 @@ public class Matching extends AppCompatActivity implements View.OnClickListener 
         questionLanguage.setChecked(Data.getSwitchChecked());
         questionLanguage.setOnClickListener(this);
 
-        card = findViewById(R.id.card);
 
         option1 = findViewById(R.id.option1);
         option2 = findViewById(R.id.option2);
@@ -110,11 +107,15 @@ public class Matching extends AppCompatActivity implements View.OnClickListener 
 
         }
 
-        if(randoms[0] == randoms[1] || randoms[0] == randoms[2] || randoms[0] == randoms[3]){
+        while(randoms[0] == randoms[1] || randoms[0] == randoms[2] || randoms[0] == randoms[3]){
             randoms[0] = (int)((Math.random() * Data.getWords().size()));
-        }else if(randoms[1] == randoms[2] || randoms[1] == randoms[3]){
+        }
+
+        while(randoms[1] == randoms[2] || randoms[1] == randoms[3] || randoms[1] == randoms[0]){
             randoms[1] = (int)((Math.random() * Data.getWords().size()));
-        }else if(randoms[2] == randoms[3]){
+        }
+
+        while(randoms[2] == randoms[3] || randoms[2] == randoms[1] || randoms[2] == randoms[0]){
             randoms[2] = (int)((Math.random() * Data.getWords().size()));
         }
 
