@@ -120,7 +120,6 @@ public class Data {
                 stringBuffer.append(lines + "\n");
             }
 
-            System.out.println("After: " + stringBuffer.toString());
 
             return stringBuffer.toString();
 

@@ -28,9 +28,10 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.Buffer;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 //TODO: figure out how saving and loading works
-public class Save extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class Save extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
     private EditText input;
     private Button saveButton;
     private ListView list;
@@ -42,14 +43,15 @@ public class Save extends AppCompatActivity implements View.OnClickListener, Ada
         switch (v.getId()){
             case R.id.saveButton:
 
-                if(!input.getText().toString().isEmpty()) {
+                String temp = Data.read("NameSet",  this);
+
+                if(!input.getText().toString().isEmpty() && !temp.contains(input.getText().toString())) {
                     //Checking if the input is empty
 
-                    String temp = Data.read("NameSet",  this);
+
 
                     Data.save(input.getText().toString(), Data.writingString(), this);
                     Data.save("NameSet", temp + input.getText().toString() + "\n", this);
-                    System.out.println(input.getText().toString() + " is Here");
 
 
 
@@ -85,6 +87,43 @@ public class Save extends AppCompatActivity implements View.OnClickListener, Ada
     }
 
     @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()){
+            case R.id.list:
+
+                String item = parent.getItemAtPosition(position).toString();
+                System.out.println("item " + item);
+
+                if(!text.getText().toString().contains(item)){
+                    File file = new File(getFilesDir(), item + ".txt");
+                    System.out.println(file.delete());
+
+                    Data.save("NameSet", remove(Data.read("NameSet", this), item), this);
+
+                    System.out.println("stuff: " + Data.read("NameSet", this));
+
+
+                    finish();
+                    overridePendingTransition(0, 0);
+                    startActivity(getIntent());
+                    overridePendingTransition(0, 0);
+
+
+                }else{
+                    Toast.makeText(this, "Please select a new set before trying to delete the current set", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+
+                break;
+        }
+
+        return true;
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save);
@@ -101,6 +140,28 @@ public class Save extends AppCompatActivity implements View.OnClickListener, Ada
         list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Data.readForList("NameSet", this)));
 
         list.setOnItemClickListener(this);
+        list.setOnItemLongClickListener(this);
+
+    }
+
+
+
+    private String remove(String given, String remove){
+        String tempString = "";
+        String returnString = "";
+        System.out.println("Given: " + given);
+
+        Scanner scan = new Scanner(given);
+
+        while(scan.hasNextLine()){
+            tempString = scan.nextLine();
+            if(!tempString.equals(remove)){
+                returnString += tempString + "\n";
+            }
+        }
+
+
+        return returnString;
 
     }
 
