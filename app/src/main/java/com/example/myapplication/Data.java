@@ -141,7 +141,11 @@ public class Data {
 
             String lines;
             while((lines = bufferedReader.readLine()) != null){
-                returnList.add(lines);
+                if(lines.contains("Current:")){
+                    returnList.add(lines.substring(lines.indexOf(":") + 2));
+                }else {
+                    returnList.add(lines);
+                }
             }
 
 

@@ -45,6 +45,7 @@ public class Save extends AppCompatActivity implements View.OnClickListener, Ada
 
                 String temp = Data.read("NameSet",  this);
 
+                //TODO: check if it'll work with example vs exam and stuff like that
                 if(!input.getText().toString().isEmpty() && !temp.contains(input.getText().toString())) {
                     //Checking if the input is empty
 
@@ -52,7 +53,8 @@ public class Save extends AppCompatActivity implements View.OnClickListener, Ada
                     //This line copies the current set into the saved file
                     //Data.save(input.getText().toString(), Data.writingString(), this);
                     Data.save(input.getText().toString(), "", this);
-                    Data.save("NameSet", temp + input.getText().toString() + "\n", this);
+
+                    Data.save("NameSet", removeSpecific(temp, "Current:") + "Current: " + input.getText().toString() + "\n", this);
 
 
 
@@ -81,6 +83,9 @@ public class Save extends AppCompatActivity implements View.OnClickListener, Ada
         switch (parent.getId()){
             case R.id.list:
                 String item = parent.getItemAtPosition(position).toString();
+                String temp = remove(removeSpecific(Data.read("NameSet", this), "Current:"), item) + "Current: " + item;
+                //System.out.println("i dont even know: " + temp);
+                Data.save("NameSet", temp, this);
                 Data.setWords(Data.readForList(item, this));
                 text.setText("Current Set: " + item);
 
@@ -141,6 +146,7 @@ public class Save extends AppCompatActivity implements View.OnClickListener, Ada
         back.setOnClickListener(this);
 
         text = findViewById(R.id.currentSet);
+        text.setText("Current Set: " + getText(Data.read("NameSet", this)));
 
         list = findViewById(R.id.list);
 
@@ -156,7 +162,7 @@ public class Save extends AppCompatActivity implements View.OnClickListener, Ada
     private String remove(String given, String remove){
         String tempString = "";
         String returnString = "";
-        System.out.println("Given: " + given);
+        //System.out.println("Given: " + given);
 
         Scanner scan = new Scanner(given);
 
@@ -169,6 +175,53 @@ public class Save extends AppCompatActivity implements View.OnClickListener, Ada
 
 
         return returnString;
+
+    }
+
+    private String removeSpecific(String given, String remove){
+        String tempString = "";
+        String returnString = "";
+        //System.out.println("Given: " + given);
+
+        Scanner scan = new Scanner(given);
+
+        while(scan.hasNextLine()){
+            tempString = scan.nextLine();
+            if(!tempString.contains(remove)){
+                returnString += tempString + "\n";
+
+            }else{
+                Scanner newScan = new Scanner(tempString);
+                while(newScan.hasNext()){
+                    String newTemp = newScan.next();
+                    System.out.println("the temp " + newTemp);
+                    if(!newTemp.equals(remove)){
+                        returnString += newTemp + "\n";
+                    }
+                }
+            }
+        }
+            return returnString;
+
+    }
+
+
+    private String getText(String given){
+        String tempString = "";
+
+        //System.out.println("Given: " + given);
+
+        Scanner scan = new Scanner(given);
+
+        while(scan.hasNextLine()){
+            tempString = scan.nextLine();
+            if(tempString.contains("Current:")){
+                return tempString.substring(tempString.indexOf(":") + 1);
+            }
+        }
+
+
+        return "";
 
     }
 

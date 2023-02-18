@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String temp = Data.read("NameSet", this);
 
             if(!temp.contains("example")) {
-                Data.save("NameSet", "example\n", this);
+                Data.save("NameSet", "Current: example\n", this);
                 Data.save("example", Data.writingString(), this);
             }
 
