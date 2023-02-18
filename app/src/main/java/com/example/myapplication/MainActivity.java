@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.button2:
-                intent = new Intent(this, AddSet.class);
+                intent = new Intent(this, AddAllSet.class);
                 startActivity(intent);
                 Data.clearWords();
                 break;
