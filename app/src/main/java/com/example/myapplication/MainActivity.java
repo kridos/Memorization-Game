@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(Data.getWords().size() > 3) {
                     intent = new Intent(this, Matching.class);
                     startActivity(intent);
+                }else{
+                    Toast.makeText(this, "Not enough items in your set", Toast.LENGTH_SHORT).show();
                 }
                 break;
 

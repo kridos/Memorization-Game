@@ -33,7 +33,7 @@ import java.util.Scanner;
 //TODO: figure out how saving and loading works
 public class Save extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
     private EditText input;
-    private Button saveButton;
+    private Button saveButton, back;
     private ListView list;
     private TextView text;
 
@@ -49,8 +49,9 @@ public class Save extends AppCompatActivity implements View.OnClickListener, Ada
                     //Checking if the input is empty
 
 
-
-                    Data.save(input.getText().toString(), Data.writingString(), this);
+                    //This line copies the current set into the saved file
+                    //Data.save(input.getText().toString(), Data.writingString(), this);
+                    Data.save(input.getText().toString(), "", this);
                     Data.save("NameSet", temp + input.getText().toString() + "\n", this);
 
 
@@ -67,6 +68,9 @@ public class Save extends AppCompatActivity implements View.OnClickListener, Ada
                 break;
 
 
+            case R.id.back:
+                finish();
+                break;
             default:
                 break;
         }
@@ -132,6 +136,9 @@ public class Save extends AppCompatActivity implements View.OnClickListener, Ada
 
         saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
+
+        back = findViewById(R.id.back);
+        back.setOnClickListener(this);
 
         text = findViewById(R.id.currentSet);
 
