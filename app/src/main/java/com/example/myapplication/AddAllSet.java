@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class AddAllSet extends AppCompatActivity implements View.OnClickListener {
 
-    private Button save, back;
+    private Button save, back, reload;
     private EditText input;
     private String current;
 
@@ -29,6 +29,12 @@ public class AddAllSet extends AppCompatActivity implements View.OnClickListener
                 Data.setWords(Data.readForList(current, this));
                 Toast.makeText(this, "saved to " + current, Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.reload:
+                input.setText(Data.read(current, this));
+                break;
+
+            default:
+                break;
         }
 
     }
@@ -43,6 +49,9 @@ public class AddAllSet extends AppCompatActivity implements View.OnClickListener
 
         back = findViewById(R.id.home);
         back.setOnClickListener(this);
+
+        reload = findViewById(R.id.reload);
+        reload.setOnClickListener(this);
 
         input = findViewById(R.id.hugeLoader);
         current = findCurrent();
@@ -60,10 +69,8 @@ public class AddAllSet extends AppCompatActivity implements View.OnClickListener
         while(scan.hasNextLine()){
             tempString = scan.nextLine();
             if(tempString.contains("Current:")){
-                Scanner newScan = new Scanner(tempString);
-                newScan.next();
 
-                return newScan.next();
+                return tempString.substring(tempString.indexOf(":") + 2);
             }
         }
 

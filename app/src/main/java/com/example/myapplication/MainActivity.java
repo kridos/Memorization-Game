@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.Manifest;
 import android.content.Intent;
@@ -22,7 +23,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Intent intent;
-    private Button practiceMatch, practiceInput, add, display, save;
+    //private Button practiceMatch, practiceInput, add, display, save;
+    private CardView practice, createNew, add, display;
     private InputStream inputStream;
     private BufferedReader reader;
 
@@ -38,23 +40,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
 
-            case R.id.button1:
+            case R.id.practice:
+                //Change this to a new activity with both learning methods
                 intent = new Intent(this, Learning.class);
                 startActivity(intent);
                 break;
 
-            case R.id.button2:
+            case R.id.add:
+                //Change this to a new activity with both adding types
                 intent = new Intent(this, AddAllSet.class);
                 startActivity(intent);
-                Data.clearWords();
+                //Data.clearWords();
                 break;
 
-            case R.id.button3:
+            case R.id.display:
                 intent = new Intent(this, DisplaySet.class);
                 startActivity(intent);
                 break;
 
-            case R.id.save:
+            case R.id.create:
                 intent = new Intent(this, Save.class);
                 startActivity(intent);
                 break;
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
 
-        practiceMatch = findViewById(R.id.button);
+        /*practiceMatch = findViewById(R.id.button);
         practiceMatch.setOnClickListener(this);
 
         practiceInput = findViewById(R.id.button1);
@@ -83,7 +87,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         display.setOnClickListener(this);
 
         save = findViewById(R.id.save);
-        save.setOnClickListener(this);
+        save.setOnClickListener(this);*/
+
+        //Go to separate page to select type of practice
+        practice = findViewById(R.id.practice);
+        practice.setOnClickListener(this);
+
+        createNew = findViewById(R.id.create);
+        createNew.setOnClickListener(this);
+
+        //Go to separate page to select type of adding
+        add = findViewById(R.id.add);
+        add.setOnClickListener(this);
+
+        display = findViewById(R.id.display);
+        display.setOnClickListener(this);
 
         Data.setWords(new ArrayList<>());
         Data.setSwitchChecked(true);
@@ -102,14 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
 
-            /*inputStream = getAssets().open("SetNames.txt");
-            reader = new BufferedReader(new InputStreamReader(inputStream));
 
-            System.out.println("Got to this point");
-
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-            }*/
 
             inputStream.close();
             reader.close();
@@ -126,6 +137,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Data.save("NameSet", "Current: example\n", this);
                 Data.save("example", Data.writingString(), this);
             }
+
+            System.out.println(Data.read("NameSet", this));
 
         } catch (IOException e) {
             e.printStackTrace();

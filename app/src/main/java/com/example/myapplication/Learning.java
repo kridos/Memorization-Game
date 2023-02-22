@@ -99,9 +99,7 @@ public class Learning extends AppCompatActivity implements View.OnClickListener 
         input = findViewById(R.id.input);
 
         int random = (int)((Math.random() * Data.getWords().size()));
-        System.out.println(random);
         String chosen = Data.getWords().get(random);
-        System.out.println("This is the word" + chosen);
         spanishWord = chosen.substring(0, chosen.indexOf("-") - 1);
         english = chosen.substring(chosen.indexOf("-") + 2);
 

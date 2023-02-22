@@ -124,9 +124,7 @@ public class Matching extends AppCompatActivity implements View.OnClickListener 
 
         populationLogic();
 
-        /*String chosen = Data.getWords().get(random);
-        spanishWord = chosen.substring(0, chosen.indexOf("-") - 1);
-        english = chosen.substring(chosen.indexOf("-") + 2);*/
+
 
 
     }
@@ -134,9 +132,7 @@ public class Matching extends AppCompatActivity implements View.OnClickListener 
 
     private void populationLogic(){
 
-        for(int i = 0; i < 4; i++){
-            System.out.println(randoms[i]);
-        }
+
         if(questionLanguage.isChecked()) {
             cardText.setText(Data.getWords().get(randoms[0]).substring(Data.getWords().get(randoms[0]).indexOf("-") + 2));
 
@@ -169,7 +165,6 @@ public class Matching extends AppCompatActivity implements View.OnClickListener 
                         boolean greaterOne = ((int)((Math.random() * 100) + 1)) > 50;
                         if(greaterOne){
                             for(int j = 3; j >= 1; j--){
-                                System.out.println("j: " + j + " " + randoms[j]);
                                 if(randoms[j] != -1){
                                     whichOne = j;
                                     break;
@@ -179,7 +174,6 @@ public class Matching extends AppCompatActivity implements View.OnClickListener 
 
                         }else{
                             for(int j = 1; j < 4; j++){
-                                System.out.println("second j: " + j + " " + randoms[j]);
                                 if(randoms[j] != -1){
                                     whichOne = j;
                                     break;
@@ -193,7 +187,6 @@ public class Matching extends AppCompatActivity implements View.OnClickListener 
 
                     }else{
                         for(int j = 1; j < 4; j++){
-                            System.out.println("third j: " + j + " " + randoms[j]);
                             if(randoms[j] != -1){
                                 whichOne = j;
                                 break;
@@ -252,7 +245,6 @@ public class Matching extends AppCompatActivity implements View.OnClickListener 
                         //Have to figure out which one was picked
                         whichOne = (int)((Math.random() * 3) + 1);
 
-                        System.out.println("Counter is " + counter + ": " + whichOne);
 
 
 
@@ -277,7 +269,6 @@ public class Matching extends AppCompatActivity implements View.OnClickListener 
                             }
                         }
 
-                        System.out.println("Counter is " + counter + ": " + whichOne);
 
 
                     }else{
@@ -289,7 +280,6 @@ public class Matching extends AppCompatActivity implements View.OnClickListener 
                             }
                         }
 
-                        System.out.println("Counter is " + counter + ": " + whichOne);
 
                     }
 

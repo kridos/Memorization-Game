@@ -84,7 +84,6 @@ public class Save extends AppCompatActivity implements View.OnClickListener, Ada
             case R.id.list:
                 String item = parent.getItemAtPosition(position).toString();
                 String temp = remove(removeSpecific(Data.read("NameSet", this), "Current:"), item) + "Current: " + item;
-                //System.out.println("i dont even know: " + temp);
                 Data.save("NameSet", temp, this);
                 Data.setWords(Data.readForList(item, this));
                 text.setText("Current Set: " + item);
@@ -101,15 +100,13 @@ public class Save extends AppCompatActivity implements View.OnClickListener, Ada
             case R.id.list:
 
                 String item = parent.getItemAtPosition(position).toString();
-                System.out.println("item " + item);
 
                 if(!text.getText().toString().contains(item)){
                     File file = new File(getFilesDir(), item + ".txt");
-                    System.out.println(file.delete());
+                    file.delete();
 
                     Data.save("NameSet", remove(Data.read("NameSet", this), item), this);
 
-                    System.out.println("stuff: " + Data.read("NameSet", this));
 
 
                     finish();
@@ -162,7 +159,6 @@ public class Save extends AppCompatActivity implements View.OnClickListener, Ada
     private String remove(String given, String remove){
         String tempString = "";
         String returnString = "";
-        //System.out.println("Given: " + given);
 
         Scanner scan = new Scanner(given);
 
@@ -181,7 +177,6 @@ public class Save extends AppCompatActivity implements View.OnClickListener, Ada
     private String removeSpecific(String given, String remove){
         String tempString = "";
         String returnString = "";
-        //System.out.println("Given: " + given);
 
         Scanner scan = new Scanner(given);
 
@@ -194,7 +189,6 @@ public class Save extends AppCompatActivity implements View.OnClickListener, Ada
                 Scanner newScan = new Scanner(tempString);
                 while(newScan.hasNext()){
                     String newTemp = newScan.next();
-                    System.out.println("the temp " + newTemp);
                     if(!newTemp.equals(remove)){
                         returnString += newTemp + "\n";
                     }
@@ -209,14 +203,13 @@ public class Save extends AppCompatActivity implements View.OnClickListener, Ada
     private String getText(String given){
         String tempString = "";
 
-        //System.out.println("Given: " + given);
 
         Scanner scan = new Scanner(given);
 
         while(scan.hasNextLine()){
             tempString = scan.nextLine();
             if(tempString.contains("Current:")){
-                return tempString.substring(tempString.indexOf(":") + 1);
+                return tempString.substring(tempString.indexOf(":") + 2);
             }
         }
 
