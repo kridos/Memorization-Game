@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.practice:
                 //Change this to a new activity with both learning methods
-                intent = new Intent(this, Learning.class);
+                intent = new Intent(this, PracticeScreen.class);
                 startActivity(intent);
                 break;
 
